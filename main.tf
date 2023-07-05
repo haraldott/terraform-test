@@ -1,9 +1,9 @@
 
 // FRONTEND
 resource "aws_instance" "frontend" {
-  ami = var.ami
-  instance_type          = var.instance_type
-  key_name               = "user1"
+  ami           = var.ami
+  instance_type = var.instance_type
+  key_name      = "user1"
 
   tags = {
     Terraform   = "true"
@@ -14,9 +14,9 @@ resource "aws_instance" "frontend" {
 
 // BACKEND
 resource "aws_instance" "backend" {
-  ami = var.ami
-  instance_type          = var.instance_type
-  key_name               = "user1"
+  ami           = var.ami
+  instance_type = var.instance_type
+  key_name      = "user1"
 
   tags = {
     Terraform   = "true"
@@ -27,9 +27,9 @@ resource "aws_instance" "backend" {
 
 // MATCHER
 resource "aws_instance" "matcher" {
-  ami = var.ami
-  instance_type          = var.instance_type
-  key_name               = "user1"
+  ami           = var.ami
+  instance_type = var.instance_type
+  key_name      = "user1"
 
   tags = {
     Terraform   = "true"
@@ -39,9 +39,9 @@ resource "aws_instance" "matcher" {
 
 // CRUNCHER
 resource "aws_instance" "cruncher" {
-  ami = var.ami
-  instance_type          = var.instance_type
-  key_name               = "user1"
+  ami           = var.ami
+  instance_type = var.instance_type
+  key_name      = "user1"
 
   tags = {
     Terraform   = "true"
