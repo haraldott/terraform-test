@@ -1,0 +1,44 @@
+version: '3.7'
+
+services:
+  frontend:
+    build: components/frontend/
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://frontend/health/" ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    ports:
+      - "8128:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+
+  backend:
+    build: components/backend/
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://backend/health/" ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    ports:
+      - "8129:80"
+    depends_on:
+      matcher:
+        condition: service_healthy
+
+  matcher:
+    build: components/matcher/
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://matcher/health/" ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    ports:
+      - "8130:80"
+
+  cruncher:
+    build: components/cruncher/
+    depends_on:
+      matcher:
+        condition: service_healthy
