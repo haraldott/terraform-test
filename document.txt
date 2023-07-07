@@ -1,0 +1,8 @@
+- Monitoring: unfortunately, given the time, I was not able to fully get the monitoring components (alertmanager, prometheus)
+to work, so I've commented that out so that terraform apply works. Also, there's no logging implemented yet.
+One would have to think about a) where to store the logs b) find a trade of between keeping them long enough / and not keeping them
+for too long, so we don't have to use too much space.
+- different environments are currently implemented by using prod / dev / staging branches.
+One would have to keep configuration for each branch in different folders and keep these folders safe from being overwritten by merges
+from dev -> staging -> prod. I've chosen this path, because it works with no extra tooling.
+- Would be able to outsource all the single resources into K8s, but would've taken too much time.
