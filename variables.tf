@@ -28,3 +28,12 @@ variable "allow_ssh_from_cidrs" {
   type        = list(string)
   default     = ["0.0.0.0/0"]
 }
+variable "environment" {
+  description = "The name of the stage"
+  type        = string
+}
+variable "monitoring_security_group" {
+  description = "The name of the monitoring security group"
+  type        = string
+  default     = "monitoring_security_group"
+}

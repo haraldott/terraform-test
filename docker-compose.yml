@@ -1,5 +1,12 @@
 version: '3.7'
 
+volumes:
+    prometheus_data: {}
+
+networks:
+  front-tier:
+  back-tier:
+
 services:
   frontend:
     build: components/frontend/
@@ -42,3 +49,29 @@ services:
     depends_on:
       matcher:
         condition: service_healthy
+
+  alertmanager:
+    container_name: alertmanager
+    hostname: alertmanager
+    image: prom/alertmanager
+    volumes:
+      - ./alertmanager.conf:/etc/alertmanager/alertmanager.conf
+    command:
+      - '--config.file=/etc/alertmanager/alertmanager.conf'
+    ports:
+      - 9093:9093
+
+  prometheus:
+    container_name: prometheus
+    hostname: prometheus
+    image: prom/prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./alert_rules.yml:/etc/prometheus/alert_rules.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    links:
+      - alertmanager:alertmanager
+    ports:
+      - 9090:9090
